@@ -1,0 +1,16 @@
+using System;
+
+class Program
+{
+    static int FibonacciRecursive(int n)
+    {
+        if (n <= 1)
+            return n;
+        return FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2);
+    }
+
+    static void Main()
+    {
+        Console.WriteLine(FibonacciRecursive(10)); // Output: 55
+    }
+}
