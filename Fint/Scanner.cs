@@ -1,61 +1,29 @@
-﻿using System.Collections.Generic;
+using System.Linq;
+using System.Collections.Generic;
 
 
 namespace Fint;
 
 
-public class Scanner
+public class Scanner(int id, params IEnumerable<Rule> rules)
 {
-    private readonly string _source;
-    private int _start, _end;
-
-    private List<Token> _tokens = [];
+    public IEnumerable<Rule> Rules { get; } = rules;
+    public int Id { get; } = id;
 
 
-    public Scanner(string source)
+    public Scanner(params IEnumerable<Rule> rules) : this(0, rules.ToList())
+    {}
+
+
+    public IEnumerable<Token> Scan(IEnumerable<Token> tokens)
     {
-        _source = source;
+        var result = new List<Token>();
+        var enumerable = tokens as Token[] ?? tokens.ToArray();
+
+        foreach (var token in enumerable)
+            if (Rules.Any(rule => rule.Pass(token)))
+                result.Add(token with { Id = Id });
+
+        return result;
     }
-
-
-    private void Reset()
-    {
-        _start = _end = 0;
-        _tokens = [];
-    }
-
-
-    public IEnumerable<Token> Scan()
-    {
-        Reset();
-
-        while (!AtEnd())
-        {
-            _start = _end;
-            ScanToken();
-        }
-
-        return _tokens;
-    }
-
-
-    private void ScanToken()
-    {
-        var ch = Advance();
-
-        if (ch is ' ' or '\n' or '\t' or '\r')
-            return;
-
-        if (char.IsAsciiLetter(ch))
-            while (!AtEnd() && char.IsAsciiLetterOrDigit(Peek()))
-                Advance();
-
-        _tokens.Add(new Token(_start, _end, _source[_start.._end]));
-    }
-
-
-    private char Advance() => _source[_end++];
-    private char Peek() => _source[_end];
-
-    private bool AtEnd() => _end >= _source.Length;
 }

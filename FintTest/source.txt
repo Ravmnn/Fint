@@ -12,5 +12,6 @@ class Program
     static void Main()
     {
         Console.WriteLine(FibonacciRecursive(10)); // Output: 55
+        Console.WriteLine("hello, world"); // this is a hello world message
     }
 }

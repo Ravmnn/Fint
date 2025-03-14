@@ -8,10 +8,13 @@ class Program
 {
     static void Main()
     {
-        var scanner = new Scanner(File.ReadAllText("../../../source.txt"));
-        var tokens = scanner.Scan();
+        var lexer = new Lexer(File.ReadAllText("../../../source.txt"));
+        var scanner = new Scanner(new MatchRule("hello", "world"));
+        var tokens = lexer.Tokenize();
+
+        tokens = scanner.Scan(tokens);
 
         foreach (var token in tokens)
-            Console.WriteLine($"\"{token.Text}\"");
+            Console.WriteLine($"\"{token.Text}\", - location: {token.Start};{token.End}, id: {token.Id}");
     }
 }
