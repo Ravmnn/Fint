@@ -4,6 +4,10 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <Version>0.1.0</Version>
+        <Title>Search for specific substrings using text matching rules. </Title>
+        <Authors>Marvin Marjan</Authors>
+        <Copyright>GPLv3</Copyright>
     </PropertyGroup>
 
 </Project>
