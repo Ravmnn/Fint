@@ -5,6 +5,9 @@ using System.Collections.Generic;
 namespace Fint;
 
 
+/// <summary>
+/// Uses rules to search for tokens.
+/// </summary>
 public class Scanner(params IEnumerable<Rule> rules)
 {
     public IEnumerable<Rule> Rules { get; } = rules;

@@ -4,18 +4,14 @@
 namespace Fint;
 
 
-public class Lexer
+/// <summary>
+/// Converts a full string into tokens.
+/// </summary>
+public class Lexer(string source)
 {
-    private readonly string _source;
     private int _start, _end;
 
     private List<Token> _tokens = [];
-
-
-    public Lexer(string source)
-    {
-        _source = source;
-    }
 
 
     private void Reset()
@@ -50,12 +46,12 @@ public class Lexer
             while (!AtEnd() && char.IsAsciiLetterOrDigit(Peek()))
                 Advance();
 
-        _tokens.Add(new Token(_start, _end, _source[_start.._end]));
+        _tokens.Add(new Token(_start, _end, source[_start.._end]));
     }
 
 
-    private char Advance() => _source[_end++];
-    private char Peek() => _source[_end];
+    private char Advance() => source[_end++];
+    private char Peek() => source[_end];
 
-    private bool AtEnd() => _end >= _source.Length;
+    private bool AtEnd() => _end >= source.Length;
 }
