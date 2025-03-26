@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -18,9 +19,6 @@ public class MatchRule(int id, params string[] identifiers) : Rule(id)
 
 
     public override bool Pass(Token token) => Identifiers.Contains(token.Text);
-
-    public override IEnumerable<Token> Process(Token[] tokens, ref int index)
-        => SetId([tokens[index]]);
 }
 
 
@@ -75,4 +73,13 @@ public class BetweenRule(int id, string left, string right, bool includeDelimite
 
         return SetId(result);
     }
+}
+
+
+public class ConditionalRule(int id, Func<Token, bool> condition) : Rule(id)
+{
+    public Func<Token, bool> Condition => condition;
+
+
+    public override bool Pass(Token token) => Condition(token);
 }

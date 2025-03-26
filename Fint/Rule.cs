@@ -28,7 +28,8 @@ public abstract class Rule(int id)
     /// <param name="tokens">The tokens source.</param>
     /// <param name="index">The index in which the first token match happened.</param>
     /// <returns>Filtered tokens based on a specific logic.</returns>
-    public abstract IEnumerable<Token> Process(Token[] tokens, ref int index);
+    public virtual IEnumerable<Token> Process(Token[] tokens, ref int index)
+        => SetId([tokens[index]]);
 
 
     protected IEnumerable<Token> SetId(IEnumerable<Token> tokens)
