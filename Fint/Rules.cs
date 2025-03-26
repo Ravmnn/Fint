@@ -76,8 +76,55 @@ public class BetweenRule(int id, string left, string right, bool includeDelimite
 }
 
 
+/// <summary>
+/// Words (a-z; A-Z) only.
+/// </summary>
+public class WordRule(int id) : Rule(id)
+{
+    public override bool Pass(Token token) => token.Text.All(ch => char.IsLetter(ch) || ch == '_');
+}
+
+/// <summary>
+/// Words (a-z; A-Z) and digits (0-9) only.
+/// </summary>
+public class WordOrDigitRule(int id) : Rule(id)
+{
+    public override bool Pass(Token token) => token.Text.All(ch => char.IsLetterOrDigit(ch) || ch == '_');
+}
+
+/// <summary>
+/// Digits (0-9) only.
+/// </summary>
+public class DigitRule(int id) : Rule(id)
+{
+    public override bool Pass(Token token) => token.Text.All(char.IsDigit);
+}
+
+/// <summary>
+/// Anything different from a word (a-z; A-Z).
+/// </summary>
+public class NonWordRule(int id) : Rule(id)
+{
+    public override bool Pass(Token token) => token.Text.All(ch => !char.IsLetter(ch) && ch != '_');
+}
+
+/// <summary>
+/// Anything different from a word (a-z; A-Z) and digit (0-9).
+/// </summary>
+public class NonWordAndDigitRule(int id) : Rule(id)
+{
+    public override bool Pass(Token token) => token.Text.All(ch => !char.IsLetterOrDigit(ch) && ch != '_');
+}
+
+
+/// <summary>
+/// Custom condition based rule.
+/// </summary>
 public class ConditionalRule(int id, Func<Token, bool> condition) : Rule(id)
 {
+    /// <summary>
+    /// The condition as a lambda.
+    /// </summary>
     public Func<Token, bool> Condition => condition;
 
 
