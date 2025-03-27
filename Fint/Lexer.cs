@@ -42,8 +42,8 @@ public class Lexer(string source)
         if (ch is ' ' or '\n' or '\t' or '\r')
             return;
 
-        if (char.IsAsciiLetter(ch))
-            while (!AtEnd() && char.IsAsciiLetterOrDigit(Peek()))
+        if (char.IsLetter(ch))
+            while (!AtEnd() && char.IsLetterOrDigit(Peek()))
                 Advance();
 
         _tokens.Add(new Token(_start, _end, source[_start.._end]));

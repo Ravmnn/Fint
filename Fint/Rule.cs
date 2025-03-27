@@ -8,12 +8,12 @@ namespace Fint;
 /// <summary>
 /// Base class for all rules.
 /// </summary>
-public abstract class Rule(int id)
+public abstract class Rule(int? id)
 {
     /// <summary>
     /// A number representing this rule. You can use this to add special meaning to each token
     /// </summary>
-    public int Id { get; } = id;
+    public int? Id { get; } = id;
 
 
     /// <summary>
@@ -29,9 +29,9 @@ public abstract class Rule(int id)
     /// <param name="index">The index in which the first token match happened.</param>
     /// <returns>Filtered tokens based on a specific logic.</returns>
     public virtual IEnumerable<Token> Process(Token[] tokens, ref int index)
-        => SetId([tokens[index]]);
+        => SetId([tokens[index]], Id);
 
 
-    protected IEnumerable<Token> SetId(IEnumerable<Token> tokens)
-        => from token in tokens select token with { Id = Id };
+    protected static IEnumerable<Token> SetId(IEnumerable<Token> tokens, int? id)
+        => from token in tokens select token with { Id = id };
 }

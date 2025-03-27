@@ -71,7 +71,7 @@ public class BetweenRule(int id, string left, string right, bool includeDelimite
             break;
         }
 
-        return SetId(result);
+        return SetId(result, Id);
     }
 }
 
