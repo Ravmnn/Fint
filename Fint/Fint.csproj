@@ -4,11 +4,10 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Version>0.4.0</Version>
         <Title>Search for specific substrings using text matching rules. </Title>
         <Authors>Ravmn</Authors>
-        <Copyright>GPLv3</Copyright>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <RepositoryUrl>https://github.com/Ravmnn/Fint</RepositoryUrl>
